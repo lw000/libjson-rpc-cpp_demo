@@ -86,6 +86,12 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.1018624408" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.403632368" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.release">
+								<option id="gnu.cpp.link.option.userobjs.1969078480" name="Other objects" superClass="gnu.cpp.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+									<listOptionValue builtIn="false" value="/usr/local/lib/liblog4z.a"/>
+									<listOptionValue builtIn="false" value="/usr/local/lib/libjsonrpccpp-client.so"/>
+									<listOptionValue builtIn="false" value="/usr/local/lib/libjsonrpccpp-server.so"/>
+									<listOptionValue builtIn="false" value="/usr/local/lib/libjsonrpccpp-common.so"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.539516342" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -132,4 +138,5 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

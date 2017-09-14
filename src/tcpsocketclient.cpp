@@ -37,50 +37,64 @@ int tcpsocketclient(int argc, char **argv) {
 	Client cli(client);
 
 	try {
-		clock_t t = clock();
-		for (int i = 0; i < 1; i++) {
-//			{
-//				Json::Value params;
-//				params["name"] = "Peter";
-//				std::string c = cli.CallMethod("sayHello", params).asString();
-////				std::cout << c << std::endl;
-//			}
 
-			{
-				Json::Value params;
-				params["a"] = 1;
-				params["b"] = 2;
-				int c = cli.CallMethod("add", params).asInt();
-				std::cout << c << std::endl;
-			}
-
-			{
-				Json::Value params;
-				{
-					Json::Value ob;
-					ob["a"] = 1;
-					ob["b"] = 2;
-					params["object"] = ob;
-				}
-				int c = cli.CallMethod("add_1", params).asInt();
-				std::cout << c << std::endl;
-			}
-
-			{
-				Json::Value params;
-				{
-					Json::Value o;
-					for (int i = 0; i < 10; i++) {
-						o[i] = i;
-					}
-					params["array"] = o;
-				}
-				int c = cli.CallMethod("sum", params).asInt();
-				std::cout << c << std::endl;
-			}
+		{
+			Json::Value params;
+			params["name"] = "Peter";
+			std::string c = cli.CallMethod("sayHello", params).asString();
+			LOGFMTD("method: %s, result: %s", "sayHello", c.c_str());
 		}
+
+		{
+			Json::Value params;
+			params["a"] = 1;
+			params["b"] = 2;
+			int c = cli.CallMethod("add", params).asInt();
+			LOGFMTD("method: %s, result: %d", "add", c);
+		}
+
+//		{
+//			Json::Value params;
+//			{
+//				params["a"] = 1;
+//				params["b"] = 2;
+//			}
+//			Json::FastWriter writer;
+//			std::string s = writer.write(params);
+//			int c = cli.CallMethod("add_1", params).asInt();
+//			LOGFMTD("method: %s, result: %d", "add_1", c);
+//		}
+
+		{
+			Json::Value params;
+			{
+				Json::Value o;
+				for (int i = 0; i < 1000; i++) {
+					o[i] = i;
+				}
+				params["array"] = o;
+			}
+			int c = cli.CallMethod("sum", params).asInt();
+			LOGFMTD("method: %s, result: %d", "sum", c);
+		}
+
+		clock_t t = clock();
+
+		for (int i = 0; i < 10000; i++) {
+			Json::Value params;
+			{
+				Json::Value o;
+				for (int i = 0; i < 1000; i++) {
+					o[i] = i;
+				}
+				params["array"] = o;
+			}
+			int c = cli.CallMethod("sum", params).asInt();
+			//				LOGFMTD("method: %s, result: %d", "sum", c);
+		}
+
 		clock_t t1 = clock();
-		LOGFMTA("exec times: %f", ((double)t1-t)/CLOCKS_PER_SEC);
+		LOGFMTA("all exec times: %f", ((double)t1-t)/CLOCKS_PER_SEC);
 
 	} catch (JsonRpcException &e) {
 		std::cerr << e.what() << std::endl;

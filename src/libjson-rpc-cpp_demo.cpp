@@ -15,16 +15,21 @@ using namespace zsummer::log4z;
 
 int main(int argc, char **argv) {
 
+	if (argc < 2) {
+		printf("please input s or c. \n");
+		return 0;
+	}
+
 	ILog4zManager::getInstance()->start();
 
 	std::string s(argv[1]);
 
 	if (s.compare("s") == 0) {
 		tcpsocketserver(argc, argv);
-	} else 	if (s.compare("c") == 0) {
+	} else if (s.compare("c") == 0) {
 		tcpsocketclient(argc, argv);
 	} else {
-		printf ("error. \n");
+		printf("error. \n");
 	}
 
 	return 0;

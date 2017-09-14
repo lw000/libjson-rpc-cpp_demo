@@ -11,6 +11,7 @@
 #include <jsonrpccpp/server/connectors/tcpsocketserver.h>
 #include <stdio.h>
 #include <string>
+
 #include "example.h"
 
 using namespace jsonrpc;
@@ -40,6 +41,11 @@ public:
 						JSON_ARRAY,
 						NULL), &SampleServer::sum);
 
+		this->bindAndAddMethod(
+				Procedure("sum_1", PARAMS_BY_NAME, JSON_STRING, "c",
+						JSON_ARRAY,
+						NULL), &SampleServer::sum_1);
+
 		this->bindAndAddNotification(
 				Procedure("notifyServer", PARAMS_BY_NAME, NULL),
 				&SampleServer::notifyServer);
@@ -63,6 +69,7 @@ public:
 		int a = ob["a"].asInt();
 		int b = ob["b"].asInt();
 		response = a + b;
+		response = 10;
 	}
 
 	// method
@@ -74,6 +81,15 @@ public:
 		}
 		response = c;
 	}
+
+	// method
+		void sum_1(const Json::Value &request, Json::Value &response) {
+			int c = request["c"].asInt();
+			for (int i = 0; i < c; i++) {
+				c += i;
+			}
+			response = c;
+		}
 
 	// notification
 	void notifyServer(const Json::Value &request) {

@@ -16,29 +16,35 @@ public:
 				jsonrpc::Procedure("sayHello", jsonrpc::PARAMS_BY_NAME,
 						jsonrpc::JSON_STRING, "name", jsonrpc::JSON_STRING,
 						NULL), &AbstractStubServer::sayHelloI);
+
 		this->bindAndAddNotification(
 				jsonrpc::Procedure("notifyServer", jsonrpc::PARAMS_BY_NAME,
 				NULL), &AbstractStubServer::notifyServerI);
+
 		this->bindAndAddMethod(
 				jsonrpc::Procedure("addNumbers", jsonrpc::PARAMS_BY_POSITION,
 						jsonrpc::JSON_INTEGER, "param01", jsonrpc::JSON_INTEGER,
 						"param02", jsonrpc::JSON_INTEGER, NULL),
 				&AbstractStubServer::addNumbersI);
+
 		this->bindAndAddMethod(
 				jsonrpc::Procedure("addNumbers2", jsonrpc::PARAMS_BY_POSITION,
 						jsonrpc::JSON_REAL, "param01", jsonrpc::JSON_REAL,
 						"param02", jsonrpc::JSON_REAL, NULL),
 				&AbstractStubServer::addNumbers2I);
+
 		this->bindAndAddMethod(
 				jsonrpc::Procedure("isEqual", jsonrpc::PARAMS_BY_POSITION,
 						jsonrpc::JSON_BOOLEAN, "param01", jsonrpc::JSON_STRING,
 						"param02", jsonrpc::JSON_STRING, NULL),
 				&AbstractStubServer::isEqualI);
+
 		this->bindAndAddMethod(
 				jsonrpc::Procedure("buildObject", jsonrpc::PARAMS_BY_POSITION,
 						jsonrpc::JSON_OBJECT, "param01", jsonrpc::JSON_STRING,
 						"param02", jsonrpc::JSON_INTEGER, NULL),
 				&AbstractStubServer::buildObjectI);
+
 		this->bindAndAddMethod(
 				jsonrpc::Procedure("methodWithoutParameters",
 						jsonrpc::PARAMS_BY_NAME, jsonrpc::JSON_STRING, NULL),
