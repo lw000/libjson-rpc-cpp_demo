@@ -82,15 +82,9 @@ int tcpsocketclient(int argc, char **argv) {
 
 		for (int i = 0; i < 10000; i++) {
 			Json::Value params;
-			{
-				Json::Value o;
-				for (int i = 0; i < 1000; i++) {
-					o[i] = i;
-				}
-				params["array"] = o;
-			}
-			int c = cli.CallMethod("sum", params).asInt();
-			//				LOGFMTD("method: %s, result: %d", "sum", c);
+			params["c"] = 1000;
+			int c = cli.CallMethod("sum_1", params).asInt();
+			LOGFMTD("[%d] sum: %d", i, c);
 		}
 
 		clock_t t1 = clock();

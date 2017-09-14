@@ -43,7 +43,7 @@ public:
 
 		this->bindAndAddMethod(
 				Procedure("sum_1", PARAMS_BY_NAME, JSON_STRING, "c",
-						JSON_ARRAY,
+						JSON_INTEGER,
 						NULL), &SampleServer::sum_1);
 
 		this->bindAndAddNotification(
@@ -85,10 +85,11 @@ public:
 	// method
 		void sum_1(const Json::Value &request, Json::Value &response) {
 			int c = request["c"].asInt();
+			int d = 0;
 			for (int i = 0; i < c; i++) {
-				c += i;
+				d += i;
 			}
-			response = c;
+			response = d;
 		}
 
 	// notification
