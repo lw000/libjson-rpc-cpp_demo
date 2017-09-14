@@ -21,13 +21,16 @@ int tcpsocketclient(int argc, char **argv) {
 	std::string host;
 	unsigned int port;
 
-	if (argc == 3) {
-		host = std::string(argv[1]);
-		port = atoi(argv[2]);
-	} else {
-		host = "127.0.0.1";
-		port = 6543;
-	}
+//	if (argc == 3) {
+//		host = std::string(argv[1]);
+//		port = atoi(argv[2]);
+//	} else {
+//		host = "127.0.0.1";
+//		port = 8002;
+//	}
+
+	host = "127.0.0.1";
+	port = 8002;
 
 	std::cout << "Params are :" << std::endl;
 	std::cout << "\t host: " << host << std::endl;
@@ -80,15 +83,17 @@ int tcpsocketclient(int argc, char **argv) {
 
 		clock_t t = clock();
 
+		int d = 0;
 		for (int i = 0; i < 10000; i++) {
 			Json::Value params;
 			params["c"] = 1000;
-			int c = cli.CallMethod("sum_1", params).asInt();
-			LOGFMTD("[%d] sum: %d", i, c);
+			d = cli.CallMethod("sum_1", params).asInt();
+//			LOGFMTD("[%d] sum: %d", i, c);
 		}
 
 		clock_t t1 = clock();
-		LOGFMTA("all exec times: %f", ((double)t1-t)/CLOCKS_PER_SEC);
+		LOGFMTA("all exec times: %f, sum: %d", ((double)t1-t)/CLOCKS_PER_SEC,
+				d);
 
 	} catch (JsonRpcException &e) {
 		std::cerr << e.what() << std::endl;

@@ -9,6 +9,7 @@
 #include <string>
 
 #include "example.h"
+#include <getopt.h>
 
 #include <log4z/log4z.h>
 using namespace zsummer::log4z;
@@ -16,17 +17,35 @@ using namespace zsummer::log4z;
 int main(int argc, char **argv) {
 
 	if (argc < 2) {
-		printf("please input s or c. \n");
-		return 0;
-	}
+			printf("client please input (-t s) or (-t c). \n");
+			return 0;
+		}
+
+		std::string t;
+
+		int ch = 0;
+		while ((ch = getopt(argc, argv, "t:")) != -1) {
+			switch (ch) {
+			case 't': {
+				if (optarg != NULL) {
+					t = optarg;
+				}
+				break;
+			}
+			default: {
+				fprintf(stderr, "(-t s) or (-t c)\n");
+				exit(1);
+				break;
+			}
+			}
+		}
 
 	ILog4zManager::getInstance()->start();
 
-	std::string s(argv[1]);
 
-	if (s.compare("s") == 0) {
+	if (t.compare("s") == 0) {
 		tcpsocketserver(argc, argv);
-	} else if (s.compare("c") == 0) {
+	} else if (t.compare("c") == 0) {
 		tcpsocketclient(argc, argv);
 	} else {
 		printf("error. \n");

@@ -104,13 +104,16 @@ int tcpsocketserver(int argc, char **argv) {
 		std::string ip;
 		unsigned int port;
 
-		if (argc == 3) {
-			ip = std::string(argv[1]);
-			port = atoi(argv[2]);
-		} else {
-			ip = "127.0.0.1";
-			port = 6543;
-		}
+//		if (argc == 3) {
+//			ip = std::string(argv[1]);
+//			port = atoi(argv[2]);
+//		} else {
+//			ip = "127.0.0.1";
+//			port = 8002;
+//		}
+
+		ip = "127.0.0.1";
+		port = 8002;
 
 		std::cout << "Params are :" << std::endl;
 		std::cout << "\t ip: " << ip << std::endl;
